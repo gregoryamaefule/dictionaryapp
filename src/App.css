@@ -3,7 +3,9 @@
   margin: 0 auto;
   /* padding: 2rem; */
 }
-
+body{
+  overflow-x: hidden;
+}
 
 .Header{
   display: flex;
@@ -167,6 +169,11 @@ hr{
   color: #2d2d2d;
   width: 100%;
 }
+.syn{
+  display: flex;
+  align-items: flex-start;
+  gap: 5%;
+}
 .syn>span{
   color: #757575;
   font-size: 14px;
@@ -182,6 +189,7 @@ hr{
   opacity: 80%;
   padding-right: 14px;
   color: #a445ed;
+  flex-basis: 70%;
 
 }
 
@@ -213,18 +221,18 @@ hr{
     width: 85vw;
   }
 }
-/* @media (max-width: 500px){
+@media (max-width: 500px){
   .Header{
-    width: 89vw;
+    width: 90vw;
   }
   form{
-    width: 89vw;
+    width: 90vw;
   }
   .resultHeader{
-    width: 89vw;
+    width: 90vw;
   }
   .POS{
-    width: 89vw;
-  } */
+    width: 90vw;
+  }
 
 

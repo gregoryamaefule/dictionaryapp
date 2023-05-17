@@ -25,11 +25,12 @@ function App() {
     fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${valuee}`)
     .then((result) => result.json() )
     .then((data) => {
-        console.log(data)
-        setReply(data == null ? null : data)
+        // console.log(data)
+        setReply(data == undefined ? null : data)
     })
     .catch((err) => {
-      console.error(err);
+      setReply(null)
+      // console.error(err);
     })
   }
   
@@ -49,6 +50,7 @@ function App() {
   document.querySelector('body').style.fontFamily = fontSpecifiedd == 'San Serif' ? 'San Serif' : fontSpecifiedd == 'Serif' ? 'Serif' : 'Monospace';
 
 
+console.log(replyy)
   
 const word = replyy[0].word;
 const phonetic = `${replyy[0].phonetic}`

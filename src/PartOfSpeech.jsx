@@ -24,7 +24,7 @@ export default function PartOfSpeech({isLightMode, fontSpecified, meaning}){
     const synonyms = meaning.synonyms.length != 0 ? 
     <p className='syn'>
       <span>Synonyms</span>
-      <span className='sy'>{meaning.synonyms}</span>
+      <span className='sy'>{meaning.synonyms.map( (item) => <span style={{paddingRight: '8px'}}>{`${item} `}</span> )}</span>
     </p> : null
   
     
