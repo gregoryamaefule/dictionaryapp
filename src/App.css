@@ -228,6 +228,15 @@ hr{
   form{
     width: 90vw;
   }
+  form>input{
+    font-size: 16px;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  form>button{
+    box-sizing: border-box;
+  }
+  
   .resultHeader{
     width: 90vw;
   }
