@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import {useState} from 'react'
 import dictionaryLogo from './assets/iconoir_book.png'
 // import oval from './assets/oval.png'
 import halfmoon from './assets/iconoir_half-moon.png'
@@ -13,62 +13,63 @@ import Header from './Header'
 import repl1 from './data'
 
 
-
 function App() {
-  const [isLightModee, setIsLightMode] = useState(true);
-  const [fontSpecifiedd, setfontSpecifiedd] = useState('San Serif');
-  const [valuee, setvaluee] = useState('keyboard');
-  const [replyy, setReply] = useState(repl1);
+    const [isLightModee, setIsLightMode] = useState(true);
+    const [fontSpecifiedd, setfontSpecifiedd] = useState('San Serif');
+    const [valuee, setvaluee] = useState('keyboard');
+    const [replyy, setReply] = useState(repl1);
+    // const [stop, setStop] = useState(false)
 
-  function handleSubmit(e){
-    e.preventDefault();
-    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${valuee}`)
-    .then((result) => result.json() )
-    .then((data) => {
-        // console.log(data)
-        setReply(data == undefined ? null : data)
-    })
-    .catch((err) => {
-      setReply(null)
-      // console.error(err);
-    })
-  }
-  
-  function handleClick(){
-    setIsLightMode(!isLightModee);
-  }
+    function handleSubmit(e) {
+        e.preventDefault();
+        fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${valuee}`)
+            .then(async (result) => {
+                const data = await result.json();
+                result.status === 404 ? setReply(replyy) : setReply(data)
+            })
+            .catch((err) => {
 
-  function handleOnFontChange(e){
-    setfontSpecifiedd(e)
-  }
+                console.error(err);
+            })
+    }
 
-  function handleSearchWordChange(e){
-    setvaluee(e)
-  }
+    function handleClick() {
+        setIsLightMode(!isLightModee);
+    }
 
-  document.querySelector('body').style.backgroundColor = isLightModee ? 'white' : 'black';
-  document.querySelector('body').style.fontFamily = fontSpecifiedd == 'San Serif' ? 'San Serif' : fontSpecifiedd == 'Serif' ? 'Serif' : 'Monospace';
+    function handleOnFontChange(e) {
+        setfontSpecifiedd(e)
+    }
+
+    function handleSearchWordChange(e) {
+        setvaluee(e)
+    }
+
+    document.querySelector('body').style.backgroundColor = isLightModee ? 'white' : 'black';
+    document.querySelector('body').style.fontFamily = fontSpecifiedd == 'San Serif' ? 'San Serif' : fontSpecifiedd == 'Serif' ? 'Serif' : 'Monospace';
 
 
-console.log(replyy)
-  
-const word = replyy[0].word;
-const phonetic = `${replyy[0].phonetic}`
 
-const partOfSpeech0 = replyy[0].meanings[0];
-const partOfSpeech1 = replyy[0].meanings[1];
-const partOfSpeech2 = replyy[0].meanings[2];
 
-  return (
-    <>
-      <Header isLightMode={isLightModee} fontSpecified={fontSpecifiedd} onToggle={handleClick} onFontChange={handleOnFontChange} />
-      <Search value={valuee} isLightMode={false} fontSpecified={fontSpecifiedd} onSearchWordChange={handleSearchWordChange} onSubmit={handleSubmit}/>
-      <ResultHeader isLightMode={isLightModee} fontSpecified={fontSpecifiedd} word={word} phonetic={phonetic} />
-      <PartOfSpeech isLightMode={isLightModee} fontSpecified={fontSpecifiedd} meaning={partOfSpeech0} />
-      <PartOfSpeech isLightMode={isLightModee} fontSpecified={fontSpecifiedd} meaning={partOfSpeech1} />
-      <PartOfSpeech isLightMode={isLightModee} fontSpecified={fontSpecifiedd} meaning={partOfSpeech2} />
-    </>
-  )
+    // const word = replyy[0].word;
+    // const phonetic = `${replyy[0].phonetic}`
+    //
+    // const partOfSpeech0 = replyy[0].meanings[0];
+    // const partOfSpeech1 = replyy[0].meanings[1];
+    // const partOfSpeech2 = replyy[0].meanings[2];
+
+    return (
+        <>
+            <Header isLightMode={isLightModee} fontSpecified={fontSpecifiedd} onToggle={handleClick}
+                    onFontChange={handleOnFontChange}/>
+            <Search value={valuee} isLightMode={false} fontSpecified={fontSpecifiedd}
+                    onSearchWordChange={handleSearchWordChange} onSubmit={handleSubmit}/>
+            <ResultHeader isLightMode={isLightModee} fontSpecified={fontSpecifiedd} word={replyy[0].word} phonetic={replyy[0].phonetic}/>
+            <PartOfSpeech isLightMode={isLightModee} fontSpecified={fontSpecifiedd} meaning={replyy[0].meanings[0]}/>
+            <PartOfSpeech isLightMode={isLightModee} fontSpecified={fontSpecifiedd} meaning={replyy[0].meanings[1]}/>
+            <PartOfSpeech isLightMode={isLightModee} fontSpecified={fontSpecifiedd} meaning={replyy[0].meanings[2]}/>
+        </>
+    )
 }
 
 export default App
